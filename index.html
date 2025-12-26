@@ -14,7 +14,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Dancing+Script:wght@400;500;600;700&family=Great+Vibes&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Dancing+Script:wght@400;500;600;700&family=Great+Vibes&family=Caveat:wght@400;500;600;700&display=swap"
         rel="stylesheet">
 
     <!-- Styles -->
@@ -23,30 +23,81 @@
     <!-- Favicon -->
     <link rel="icon"
         href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💕</text></svg>">
+
+    <!-- Premium Animation Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
 </head>
 
 <body>
-    <!-- ========== LOADING SCREEN ========== -->
-    <div class="loading-screen" id="loadingScreen">
-        <div class="loading-content">
-            <div class="heart-container">
-                <svg class="animated-heart" viewBox="0 0 32 29.6">
-                    <path d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2
-                    c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z" />
-                </svg>
+    <!-- ========== PREMIUM LOADING SCREEN ========== -->
+    <div class="premium-loading-screen" id="loadingScreen">
+        <!-- Particle Background -->
+        <canvas id="loadingParticles" class="loading-particles-canvas"></canvas>
+
+        <!-- 3D Animated Heart -->
+        <div class="loading-heart-3d">
+            <div class="heart-3d-wrapper">
+                <div class="heart-3d">
+                    <div class="heart-face front"></div>
+                    <div class="heart-face back"></div>
+                    <div class="heart-face left"></div>
+                    <div class="heart-face right"></div>
+                </div>
             </div>
-            <h1 class="loading-names">
-                <span class="name name-ela">Ela</span>
-                <span class="ampersand">&</span>
-                <span class="name name-kaan">Kaan</span>
+            <div class="heart-glow"></div>
+            <div class="heart-pulse-ring"></div>
+            <div class="heart-pulse-ring delay-1"></div>
+            <div class="heart-pulse-ring delay-2"></div>
+        </div>
+
+        <!-- Names with Typewriter -->
+        <div class="loading-names-container">
+            <h1 class="loading-names-premium">
+                <span class="name-char" data-delay="0">E</span>
+                <span class="name-char" data-delay="1">l</span>
+                <span class="name-char" data-delay="2">a</span>
+                <span class="ampersand-animated">&</span>
+                <span class="name-char" data-delay="3">K</span>
+                <span class="name-char" data-delay="4">a</span>
+                <span class="name-char" data-delay="5">a</span>
+                <span class="name-char" data-delay="6">n</span>
             </h1>
-            <p class="loading-tagline">Bizim Hikayemiz</p>
-            <div class="loading-bar">
-                <div class="loading-progress"></div>
+        </div>
+
+        <!-- Rotating Quotes -->
+        <div class="loading-quote-rotator">
+            <p class="rotating-quote active" data-quote="0">💕 Aşk yükleniyor...</p>
+            <p class="rotating-quote" data-quote="1">✨ Anılar hazırlanıyor...</p>
+            <p class="rotating-quote" data-quote="2">💫 Sihir başlıyor...</p>
+            <p class="rotating-quote" data-quote="3">❤️ Kalpler birleşiyor...</p>
+        </div>
+
+        <!-- Circular Progress -->
+        <div class="circular-progress-container">
+            <svg class="circular-progress" viewBox="0 0 120 120">
+                <circle class="progress-bg" cx="60" cy="60" r="54" />
+                <circle class="progress-fill" cx="60" cy="60" r="54" stroke-dasharray="339.292"
+                    stroke-dashoffset="339.292" />
+            </svg>
+            <div class="progress-text">
+                <span class="progress-percentage" id="loadingPercentage">0</span>
+                <span class="progress-symbol">%</span>
             </div>
         </div>
-        <div class="loading-particles"></div>
+
+        <!-- Skip Button (appears after 2s) -->
+        <button class="loading-skip-btn" id="skipLoading">
+            <span>Atla</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+        </button>
     </div>
+
+    <!-- ========== CURSOR TRAIL CONTAINER ========== -->
+    <div id="cursorTrailContainer" class="cursor-trail-container"></div>
 
     <!-- ========== NAVIGATION ========== -->
     <nav class="navbar" id="navbar">
@@ -73,7 +124,7 @@
         <div class="scroll-progress" id="scrollProgress"></div>
     </nav>
 
-    <!-- ========== HERO SECTION ========== -->
+    <!-- ========== HERO SECTION ENHANCED ========== -->
     <section class="hero-section" id="home">
         <div class="hero-background">
             <img src="images/Gemini_Generated_Image_xf0uhuxf0uhuxf0u.png" alt="Ela & Kaan" class="hero-bg-image">
@@ -93,16 +144,44 @@
                     </span>
                     <span class="title-line line-kaan">Kaan</span>
                 </h1>
-                <h2 class="hero-subtitle">
-                    <span class="typewriter" id="heroSubtitle"></span>
-                    <span class="cursor">|</span>
-                </h2>
-                <blockquote class="hero-quote">
-                    <p>"Seni tanımadan önce aşkın ne olduğunu bilmiyordum..."</p>
-                    <cite>- Kaan, Ela'ya</cite>
-                </blockquote>
-                <a href="#our-story" class="cta-button">
-                    <span>Hikayemizi Keşfet</span>
+
+                <!-- Relationship Stats with Animated Counters -->
+                <div class="relationship-stats">
+                    <div class="stat-box">
+                        <span class="stat-number counter" id="statDays" data-target="1411">0</span>
+                        <span class="stat-label">Gün Birlikte</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-number counter" id="statHours" data-target="33864">0</span>
+                        <span class="stat-label">Saat</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-number counter" id="statMinutes" data-target="2031840">0</span>
+                        <span class="stat-label">Dakika</span>
+                    </div>
+                </div>
+
+                <!-- Rotating Quote System -->
+                <div class="hero-quote-rotator">
+                    <blockquote class="hero-quote rotating active" data-quote="0">
+                        <p>"Seni tanımadan önce aşkın ne olduğunu bilmiyordum..."</p>
+                        <cite>- Kaan, Ela'ya</cite>
+                    </blockquote>
+                    <blockquote class="hero-quote rotating" data-quote="1">
+                        <p>"Seninle her gün, sanki ilk günmüş gibi heyecanlı..."</p>
+                        <cite>- Ela, Kaan'a</cite>
+                    </blockquote>
+                    <blockquote class="hero-quote rotating" data-quote="2">
+                        <p>"Sen benim en güzel kaderimsin..."</p>
+                        <cite>- Kaan, Ela'ya</cite>
+                    </blockquote>
+                </div>
+
+                <!-- CTA with Particle Burst -->
+                <a href="#our-story" class="cta-button cta-premium" id="heroCtaBtn">
+                    <span class="btn-text">Hikayemizi Keşfet</span>
+                    <span class="btn-particles"></span>
+                    <span class="btn-glow"></span>
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M12 5v14M5 12l7 7 7-7" />
                     </svg>
@@ -142,7 +221,7 @@
 
             <div class="timeline-events">
                 <!-- Event 1: İlk Tanışma -->
-                <div class="timeline-event" data-aos="fade-right">
+                <div class="timeline-event">
                     <div class="event-marker">
                         <span class="marker-icon">📚</span>
                         <span class="marker-pulse"></span>
@@ -170,7 +249,7 @@
                 </div>
 
                 <!-- Event 2: İlk Randevu -->
-                <div class="timeline-event" data-aos="fade-left">
+                <div class="timeline-event">
                     <div class="event-marker">
                         <span class="marker-icon">🌅</span>
                         <span class="marker-pulse"></span>
@@ -198,7 +277,7 @@
                 </div>
 
                 <!-- Event 3: İlk Öpücük -->
-                <div class="timeline-event" data-aos="fade-right">
+                <div class="timeline-event">
                     <div class="event-marker">
                         <span class="marker-icon">💋</span>
                         <span class="marker-pulse"></span>
@@ -226,7 +305,7 @@
                 </div>
 
                 <!-- Event 4: İlk Seyahat - Kapadokya -->
-                <div class="timeline-event" data-aos="fade-left">
+                <div class="timeline-event">
                     <div class="event-marker">
                         <span class="marker-icon">🎈</span>
                         <span class="marker-pulse"></span>
@@ -253,7 +332,7 @@
                 </div>
 
                 <!-- Event 5: Seni Seviyorum -->
-                <div class="timeline-event" data-aos="fade-right">
+                <div class="timeline-event">
                     <div class="event-marker">
                         <span class="marker-icon">❤️</span>
                         <span class="marker-pulse"></span>
@@ -280,7 +359,7 @@
                 </div>
 
                 <!-- Event 6: 1. Yıldönümü -->
-                <div class="timeline-event" data-aos="fade-left">
+                <div class="timeline-event">
                     <div class="event-marker">
                         <span class="marker-icon">🎂</span>
                         <span class="marker-pulse"></span>
@@ -307,7 +386,7 @@
                 </div>
 
                 <!-- Event 7: İlk Ev -->
-                <div class="timeline-event" data-aos="fade-right">
+                <div class="timeline-event">
                     <div class="event-marker">
                         <span class="marker-icon">🏠</span>
                         <span class="marker-pulse"></span>
@@ -334,7 +413,7 @@
                 </div>
 
                 <!-- Event 8: EVLİLİK TEKLİFİ -->
-                <div class="timeline-event featured-event" data-aos="zoom-in">
+                <div class="timeline-event featured-event">
                     <div class="event-marker special-marker">
                         <span class="marker-icon">💍</span>
                         <span class="marker-pulse special-pulse"></span>
@@ -378,7 +457,7 @@
                 </div>
 
                 <!-- Event 9: Nişan -->
-                <div class="timeline-event" data-aos="fade-left">
+                <div class="timeline-event">
                     <div class="event-marker">
                         <span class="marker-icon">🎉</span>
                         <span class="marker-pulse"></span>
@@ -404,7 +483,7 @@
                 </div>
 
                 <!-- Event 10: DÜĞÜN -->
-                <div class="timeline-event featured-event" data-aos="zoom-in">
+                <div class="timeline-event featured-event">
                     <div class="event-marker special-marker">
                         <span class="marker-icon">💒</span>
                         <span class="marker-pulse special-pulse"></span>
@@ -456,7 +535,7 @@
                 </div>
 
                 <!-- Event 11: Balayı -->
-                <div class="timeline-event" data-aos="fade-right">
+                <div class="timeline-event">
                     <div class="event-marker">
                         <span class="marker-icon">✈️</span>
                         <span class="marker-pulse"></span>
@@ -482,7 +561,7 @@
                 </div>
 
                 <!-- Event 12: Şimdi -->
-                <div class="timeline-event current-event" data-aos="fade-up">
+                <div class="timeline-event current-event">
                     <div class="event-marker current-marker">
                         <span class="marker-icon">♾️</span>
                         <span class="marker-pulse infinite-pulse"></span>
@@ -697,7 +776,7 @@
 
         <div class="special-moments-grid">
             <!-- Proposal -->
-            <div class="special-card" data-aos="fade-up">
+            <div class="special-card">
                 <div class="special-image">
                     <img src="images/Gemini_Generated_Image_yosrs0yosrs0yosr.png" alt="Evlilik Teklifi" loading="lazy">
                     <div class="special-badge">💍 EVET!</div>
@@ -711,7 +790,7 @@
             </div>
 
             <!-- Wedding -->
-            <div class="special-card" data-aos="fade-up" data-aos-delay="100">
+            <div class="special-card">
                 <div class="special-image">
                     <img src="images/Gemini_Generated_Image_eze0emeze0emeze0.png" alt="Düğün" loading="lazy">
                     <div class="special-badge">💒 EVLİLİK</div>
@@ -725,7 +804,7 @@
             </div>
 
             <!-- First Home -->
-            <div class="special-card" data-aos="fade-up" data-aos-delay="200">
+            <div class="special-card">
                 <div class="special-image">
                     <img src="images/Gemini_Generated_Image_bcj9lcbcj9lcbcj9.png" alt="İlk Evimiz" loading="lazy">
                     <div class="special-badge">🏠 YUVAMIZ</div>
@@ -750,7 +829,7 @@
 
         <div class="notes-grid">
             <!-- From Kaan -->
-            <div class="note-card from-kaan" data-aos="fade-right">
+            <div class="note-card from-kaan">
                 <div class="note-header">
                     <span class="note-from">Kaan'dan Ela'ya 💙</span>
                     <span class="note-date">14 Şubat 2024</span>
@@ -782,7 +861,7 @@
             </div>
 
             <!-- From Ela -->
-            <div class="note-card from-ela" data-aos="fade-left">
+            <div class="note-card from-ela">
                 <div class="note-header">
                     <span class="note-from">Ela'dan Kaan'a 💕</span>
                     <span class="note-date">20 Mayıs 2024</span>
@@ -822,28 +901,28 @@
         </div>
 
         <div class="dates-grid">
-            <div class="date-card" data-aos="zoom-in">
+            <div class="date-card">
                 <div class="date-icon">📚</div>
                 <h3>İlk Tanışma</h3>
                 <div class="date-value">14 Şubat 2021</div>
                 <div class="date-ago" id="firstMeetingAgo"></div>
             </div>
 
-            <div class="date-card" data-aos="zoom-in" data-aos-delay="100">
+            <div class="date-card">
                 <div class="date-icon">💕</div>
                 <h3>İlk "Seni Seviyorum"</h3>
                 <div class="date-value">23 Temmuz 2021</div>
                 <div class="date-ago" id="firstILoveYouAgo"></div>
             </div>
 
-            <div class="date-card" data-aos="zoom-in" data-aos-delay="200">
+            <div class="date-card">
                 <div class="date-icon">💍</div>
                 <h3>Evlilik Teklifi</h3>
                 <div class="date-value">15 Ağustos 2023</div>
                 <div class="date-ago" id="proposalAgo"></div>
             </div>
 
-            <div class="date-card special-date-card" data-aos="zoom-in" data-aos-delay="300">
+            <div class="date-card special-date-card">
                 <div class="date-icon">💒</div>
                 <h3>Düğün Günümüz</h3>
                 <div class="date-value">20 Mayıs 2024</div>
@@ -851,34 +930,312 @@
             </div>
         </div>
 
-        <!-- Countdown to Anniversary -->
-        <div class="countdown-section" data-aos="fade-up">
+        <!-- Premium Flip Countdown to Anniversary -->
+        <div class="flip-countdown-section">
             <h3 class="countdown-title">
-                <span class="countdown-icon">🎂</span>
-                4. Yıl Dönümümüze Kalan Süre
+                <span class="countdown-icon pulse-glow">🎂</span>
+                <span class="glow-text">5. Yıl Dönümümüze Kalan Süre</span>
             </h3>
-            <div class="countdown-timer" id="countdownTimer">
-                <div class="countdown-item">
-                    <span class="countdown-value" id="countdownDays">--</span>
-                    <span class="countdown-label">Gün</span>
+            <p class="countdown-date">14 Şubat 2026</p>
+
+            <div class="flip-countdown-timer" id="flipCountdown">
+                <div class="flip-unit">
+                    <div class="flip-card" id="flipDays">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <span class="flip-number">--</span>
+                            </div>
+                            <div class="flip-card-back">
+                                <span class="flip-number">--</span>
+                            </div>
+                        </div>
+                    </div>
+                    <span class="flip-label">Gün</span>
                 </div>
-                <div class="countdown-separator">:</div>
-                <div class="countdown-item">
-                    <span class="countdown-value" id="countdownHours">--</span>
-                    <span class="countdown-label">Saat</span>
+
+                <div class="flip-separator">:</div>
+
+                <div class="flip-unit">
+                    <div class="flip-card" id="flipHours">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <span class="flip-number">--</span>
+                            </div>
+                            <div class="flip-card-back">
+                                <span class="flip-number">--</span>
+                            </div>
+                        </div>
+                    </div>
+                    <span class="flip-label">Saat</span>
                 </div>
-                <div class="countdown-separator">:</div>
-                <div class="countdown-item">
-                    <span class="countdown-value" id="countdownMinutes">--</span>
-                    <span class="countdown-label">Dakika</span>
+
+                <div class="flip-separator">:</div>
+
+                <div class="flip-unit">
+                    <div class="flip-card" id="flipMinutes">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <span class="flip-number">--</span>
+                            </div>
+                            <div class="flip-card-back">
+                                <span class="flip-number">--</span>
+                            </div>
+                        </div>
+                    </div>
+                    <span class="flip-label">Dakika</span>
                 </div>
-                <div class="countdown-separator">:</div>
-                <div class="countdown-item">
-                    <span class="countdown-value" id="countdownSeconds">--</span>
-                    <span class="countdown-label">Saniye</span>
+
+                <div class="flip-separator">:</div>
+
+                <div class="flip-unit">
+                    <div class="flip-card" id="flipSeconds">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <span class="flip-number">--</span>
+                            </div>
+                            <div class="flip-card-back">
+                                <span class="flip-number">--</span>
+                            </div>
+                        </div>
+                    </div>
+                    <span class="flip-label">Saniye</span>
                 </div>
             </div>
         </div>
+    </section>
+
+    <!-- ========== MUSIC PLAYER SECTION ========== -->
+    <section class="music-player-section" id="music">
+        <div class="section-header">
+            <span class="section-badge">🎵 Şarkılarımız</span>
+            <h2 class="section-title">Bizim Şarkılarımız</h2>
+            <p class="section-subtitle">Her şarkı bir anıyla dolu...</p>
+        </div>
+
+        <div class="music-player-premium">
+            <!-- Album Art with Vinyl -->
+            <div class="player-visual">
+                <div class="vinyl-container">
+                    <div class="vinyl-record">
+                        <div class="vinyl-label">💕</div>
+                    </div>
+                    <div class="album-art">
+                        <img src="images/Gemini_Generated_Image_r2auwrr2auwrr2au.png" alt="Album" class="album-image">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Player Controls -->
+            <div class="player-controls">
+                <div class="track-info">
+                    <h3 class="track-title" id="trackTitle">Perfect</h3>
+                    <p class="track-artist" id="trackArtist">Ed Sheeran</p>
+                    <span class="track-memory">💃 İlk dansımızın şarkısı</span>
+                </div>
+
+                <!-- Progress Bar -->
+                <div class="progress-container">
+                    <span class="time-current">0:00</span>
+                    <div class="progress-bar-track">
+                        <div class="progress-bar-fill" id="musicProgress"></div>
+                    </div>
+                    <span class="time-total">4:23</span>
+                </div>
+
+                <!-- Control Buttons -->
+                <div class="control-buttons">
+                    <button class="ctrl-btn" id="prevTrack">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M6 6h2v12H6zm3.5 6l8.5 6V6z" />
+                        </svg>
+                    </button>
+                    <button class="ctrl-btn play-btn" id="playPause">
+                        <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M8 5v14l11-7z" />
+                        </svg>
+                        <svg class="pause-icon hidden" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+                        </svg>
+                    </button>
+                    <button class="ctrl-btn" id="nextTrack">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Playlist -->
+            <div class="playlist-container">
+                <h4 class="playlist-title">🎶 Çalma Listesi</h4>
+                <div class="playlist-tracks" id="playlistTracks">
+                    <div class="track-item active" data-track="0">
+                        <span class="track-number">01</span>
+                        <div class="track-details">
+                            <h5>Perfect</h5>
+                            <p>Ed Sheeran</p>
+                        </div>
+                        <span class="track-duration">4:23</span>
+                        <span class="track-tag">💃 İlk Dans</span>
+                    </div>
+                    <div class="track-item" data-track="1">
+                        <span class="track-number">02</span>
+                        <div class="track-details">
+                            <h5>All of Me</h5>
+                            <p>John Legend</p>
+                        </div>
+                        <span class="track-duration">4:29</span>
+                        <span class="track-tag">💕 Evlilik Teklifi</span>
+                    </div>
+                    <div class="track-item" data-track="2">
+                        <span class="track-number">03</span>
+                        <div class="track-details">
+                            <h5>Thinking Out Loud</h5>
+                            <p>Ed Sheeran</p>
+                        </div>
+                        <span class="track-duration">4:41</span>
+                        <span class="track-tag">☕ İlk Buluşma</span>
+                    </div>
+                    <div class="track-item" data-track="3">
+                        <span class="track-number">04</span>
+                        <div class="track-details">
+                            <h5>A Thousand Years</h5>
+                            <p>Christina Perri</p>
+                        </div>
+                        <span class="track-duration">4:45</span>
+                        <span class="track-tag">💒 Düğün</span>
+                    </div>
+                    <div class="track-item" data-track="4">
+                        <span class="track-number">05</span>
+                        <div class="track-details">
+                            <h5>Can't Help Falling in Love</h5>
+                            <p>Elvis Presley</p>
+                        </div>
+                        <span class="track-duration">3:00</span>
+                        <span class="track-tag">❤️ Favorimiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== LOVE QUIZ SECTION ========== -->
+    <section class="love-quiz-section" id="love-quiz">
+        <div class="section-header">
+            <span class="section-badge">❤️ Oyun Zamanı</span>
+            <h2 class="section-title">Birbirimizi Ne Kadar Tanıyoruz?</h2>
+            <p class="section-subtitle">10 soruluk romantik quizimiz!</p>
+        </div>
+
+        <div class="quiz-container" id="quizContainer">
+            <div class="quiz-progress">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="quizProgressFill"></div>
+                </div>
+                <span class="question-counter" id="questionCounter">Soru 1 / 10</span>
+            </div>
+
+            <div class="question-card" id="questionCard">
+                <h3 class="question-text" id="questionText">Yükleniyor...</h3>
+                <div class="answers-grid" id="answersGrid"></div>
+                <div class="answer-feedback" id="answerFeedback"></div>
+            </div>
+
+            <div class="quiz-results hidden" id="quizResults">
+                <div class="results-hearts">
+                    <span class="heart-score" id="heartScore">💕</span>
+                </div>
+                <h3 class="results-title">Sonucunuz:</h3>
+                <div class="score-display">
+                    <span class="score-value" id="finalScore">0</span>
+                    <span class="score-total">/ 10</span>
+                </div>
+                <p class="results-message" id="resultsMessage">Hesaplanıyor...</p>
+                <button class="retry-quiz-btn" id="retryQuizBtn">
+                    <span>🔄 Tekrar Dene</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== SECRET MESSAGES WALL ========== -->
+    <section class="secret-messages-section" id="secret-messages">
+        <div class="section-header">
+            <span class="section-badge">💝 Sürpriz</span>
+            <h2 class="section-title glow-text">Gizli Mesajlar Duvarı</h2>
+            <p class="section-subtitle">Her kalbin içinde bir mesaj saklı... Keşfet!</p>
+        </div>
+
+        <div class="hearts-wall" id="heartsWall"></div>
+
+        <div class="message-modal" id="messageModal">
+            <div class="modal-content glass-morphism">
+                <button class="modal-close" id="closeMessageModal">×</button>
+                <div class="message-container">
+                    <span class="message-from" id="messageFrom">💙 Kaan'dan Ela'ya</span>
+                    <p class="secret-message" id="secretMessageText"></p>
+                    <span class="message-date" id="messageDate"></span>
+                </div>
+                <button class="next-message-btn" id="nextMessageBtn">
+                    <span>Sonraki Mesaj 💕</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== GIFT BOX SECTION ========== -->
+    <section class="gift-box-section" id="gift-box">
+        <div class="section-header">
+            <span class="section-badge">🎁 Özel Hediye</span>
+            <h2 class="section-title glow-text">Sana Özel Bir Hediye</h2>
+            <p class="section-subtitle">Açmak için kutuya tıkla!</p>
+        </div>
+
+        <div class="gift-box-container">
+            <div class="gift-box-3d" id="giftBox">
+                <div class="box-lid">
+                    <div class="lid-front"></div>
+                    <div class="lid-back"></div>
+                    <div class="lid-left"></div>
+                    <div class="lid-right"></div>
+                    <div class="lid-top">
+                        <div class="ribbon-bow">🎀</div>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <div class="box-front"></div>
+                    <div class="box-back"></div>
+                    <div class="box-left"></div>
+                    <div class="box-right"></div>
+                    <div class="box-bottom"></div>
+                    <div class="ribbon-vertical"></div>
+                    <div class="ribbon-horizontal"></div>
+                </div>
+                <div class="gift-hint pulse-text">🖱️ Tıkla ve aç!</div>
+            </div>
+
+            <div class="gift-content hidden" id="giftContent">
+                <div class="revealed-gift">
+                    <div class="love-letter">
+                        <div class="letter-header">
+                            <span class="letter-icon">💌</span>
+                            <h3>Ela'ya Özel Aşk Mektubu</h3>
+                        </div>
+                        <div class="letter-body">
+                            <p class="handwriting">Sevgili Ela'm,</p>
+                            <p class="handwriting">Seninle tanıştığım günden beri hayatım tamamen değişti. Sen benim
+                                güneşim, ayım, yıldızlarımsın.</p>
+                            <p class="handwriting">Her sabah gözlerimi açtığımda ilk düşündüğüm sen oluyorsun. Her gece
+                                uyumadan önce son düşündüğüm yine sen...</p>
+                            <p class="handwriting">Seninle geçirdiğim her an, hayatımın en değerli hazinesi. Seni
+                                sonsuza dek seveceğim.</p>
+                            <p class="handwriting signature">Sonsuz aşkla,<br>Kaan 💕</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <canvas id="giftConfetti" class="confetti-canvas"></canvas>
     </section>
 
     <!-- ========== FOOTER ========== -->
