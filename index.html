@@ -1,22 +1,30 @@
 <!DOCTYPE html>
 <html lang="tr">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+    <meta name="theme-color" content="#0a0a0a">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="description" content="Ela & Kaan - Bizim Aşk Hikayemiz | 14 Şubat 2021'den Beri Birlikte">
     <title>Ela & Kaan | Bizim Hikayemiz 💕</title>
-    
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Dancing+Script:wght@400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Dancing+Script:wght@400;500;600;700&family=Great+Vibes&display=swap"
+        rel="stylesheet">
+
     <!-- Styles -->
     <link rel="stylesheet" href="styles.css">
-    
+
     <!-- Favicon -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💕</text></svg>">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💕</text></svg>">
 </head>
+
 <body>
     <!-- ========== LOADING SCREEN ========== -->
     <div class="loading-screen" id="loadingScreen">
@@ -24,7 +32,7 @@
             <div class="heart-container">
                 <svg class="animated-heart" viewBox="0 0 32 29.6">
                     <path d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2
-                    c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z"/>
+                    c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z" />
                 </svg>
             </div>
             <h1 class="loading-names">
@@ -72,7 +80,7 @@
             <div class="hero-overlay"></div>
         </div>
         <canvas id="particlesCanvas" class="particles-canvas"></canvas>
-        
+
         <div class="hero-content">
             <div class="hero-text">
                 <h1 class="hero-title">
@@ -80,7 +88,7 @@
                     <span class="title-heart">
                         <svg viewBox="0 0 32 29.6" class="heart-svg">
                             <path d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2
-                            c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z"/>
+                            c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z" />
                         </svg>
                     </span>
                     <span class="title-line line-kaan">Kaan</span>
@@ -96,11 +104,11 @@
                 <a href="#our-story" class="cta-button">
                     <span>Hikayemizi Keşfet</span>
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M12 5v14M5 12l7 7 7-7"/>
+                        <path d="M12 5v14M5 12l7 7 7-7" />
                     </svg>
                 </a>
             </div>
-            
+
             <div class="hero-photos">
                 <div class="photo-card card-1">
                     <img src="images/Gemini_Generated_Image_r2auwrr2auwrr2au.png" alt="Ela & Kaan - Yakın Portre">
@@ -110,7 +118,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="scroll-indicator">
             <span>Aşağı Kaydır</span>
             <div class="mouse">
@@ -126,12 +134,12 @@
             <h2 class="section-title">Bizim Hikayemiz</h2>
             <p class="section-subtitle">Her anımız, birlikte yazdığımız kitabın bir sayfası...</p>
         </div>
-        
+
         <div class="timeline-container">
             <div class="timeline-line">
                 <div class="timeline-progress" id="timelineProgress"></div>
             </div>
-            
+
             <div class="timeline-events">
                 <!-- Event 1: İlk Tanışma -->
                 <div class="timeline-event" data-aos="fade-right">
@@ -141,19 +149,20 @@
                     </div>
                     <div class="event-content left">
                         <div class="event-image">
-                            <img src="images/Gemini_Generated_Image_q8eaypq8eaypq8ea.png" alt="İlk Tanışma" loading="lazy">
+                            <img src="images/Gemini_Generated_Image_q8eaypq8eaypq8ea.png" alt="İlk Tanışma"
+                                loading="lazy">
                             <div class="image-shine"></div>
                         </div>
                         <div class="event-details">
                             <span class="event-date">14 Şubat 2021</span>
                             <h3 class="event-title">İlk Tanışmamız ☕</h3>
                             <p class="event-description">
-                                Karaköy'deki o küçük kitap kafede, aynı kitaba uzanan iki el... 
-                                Dostoyevski'nin "Budala"sını ikimiz de almak istiyorduk. Gözlerimiz 
+                                Karaköy'deki o küçük kitap kafede, aynı kitaba uzanan iki el...
+                                Dostoyevski'nin "Budala"sını ikimiz de almak istiyorduk. Gözlerimiz
                                 ilk kez buluştuğunda, zamanın durduğunu hissettim.
                             </p>
                             <blockquote class="event-quote">
-                                "O gün kitabı sen aldın, ama kalbimi ben sana verdim." 
+                                "O gün kitabı sen aldın, ama kalbimi ben sana verdim."
                                 <span class="quote-author">- Kaan</span>
                             </blockquote>
                         </div>
@@ -168,19 +177,20 @@
                     </div>
                     <div class="event-content right">
                         <div class="event-image">
-                            <img src="images/Gemini_Generated_Image_v2wbsv2wbsv2wbsv.png" alt="İlk Randevu" loading="lazy">
+                            <img src="images/Gemini_Generated_Image_v2wbsv2wbsv2wbsv.png" alt="İlk Randevu"
+                                loading="lazy">
                             <div class="image-shine"></div>
                         </div>
                         <div class="event-details">
                             <span class="event-date">20 Şubat 2021</span>
                             <h3 class="event-title">İlk Randevumuz 🌊</h3>
                             <p class="event-description">
-                                Boğaz kıyısında gün batımında yürüyüş. Martıların çığlıkları, 
-                                dalgaların sesi ve senin gülüşün... O gün anladım ki, seninle 
+                                Boğaz kıyısında gün batımında yürüyüş. Martıların çığlıkları,
+                                dalgaların sesi ve senin gülüşün... O gün anladım ki, seninle
                                 her gün batımını izlemek istiyorum.
                             </p>
                             <blockquote class="event-quote">
-                                "İlk randevuda 3 saat konuştuk ama sanki 10 dakika geçti." 
+                                "İlk randevuda 3 saat konuştuk ama sanki 10 dakika geçti."
                                 <span class="quote-author">- Ela</span>
                             </blockquote>
                         </div>
@@ -195,19 +205,20 @@
                     </div>
                     <div class="event-content left">
                         <div class="event-image">
-                            <img src="images/Gemini_Generated_Image_l53coal53coal53c.png" alt="İlk Öpücük" loading="lazy">
+                            <img src="images/Gemini_Generated_Image_l53coal53coal53c.png" alt="İlk Öpücük"
+                                loading="lazy">
                             <div class="image-shine"></div>
                         </div>
                         <div class="event-details">
                             <span class="event-date">10 Mart 2021</span>
                             <h3 class="event-title">İlk Öpücüğümüz 💕</h3>
                             <p class="event-description">
-                                Balat'ın renkli sokaklarında, pembe bir kapının önünde... 
-                                Kalbim çok hızlı atıyordu. Gözlerine baktım ve o an her şeyin 
+                                Balat'ın renkli sokaklarında, pembe bir kapının önünde...
+                                Kalbim çok hızlı atıyordu. Gözlerine baktım ve o an her şeyin
                                 değiştiğini anladım.
                             </p>
                             <blockquote class="event-quote">
-                                "O anın tadı hala dudaklarımda." 
+                                "O anın tadı hala dudaklarımda."
                                 <span class="quote-author">- Kaan</span>
                             </blockquote>
                         </div>
@@ -222,18 +233,19 @@
                     </div>
                     <div class="event-content right">
                         <div class="event-image">
-                            <img src="images/Gemini_Generated_Image_28eby828eby828eb.png" alt="Kapadokya" loading="lazy">
+                            <img src="images/Gemini_Generated_Image_28eby828eby828eb.png" alt="Kapadokya"
+                                loading="lazy">
                             <div class="image-shine"></div>
                         </div>
                         <div class="event-details">
                             <span class="event-date">15 Haziran 2021</span>
                             <h3 class="event-title">İlk Seyahatimiz - Kapadokya 🎈</h3>
                             <p class="event-description">
-                                Gün doğumunda balonda, yüzlerce balonun arasında... Bulutların 
+                                Gün doğumunda balonda, yüzlerce balonun arasında... Bulutların
                                 üstünde uçuyorduk ama beni asıl senin kolların yere bağlıyordu.
                             </p>
                             <blockquote class="event-quote">
-                                "Bu seyahat hayatımın dönüm noktasıydı..." 
+                                "Bu seyahat hayatımın dönüm noktasıydı..."
                                 <span class="quote-author">- Kaan</span>
                             </blockquote>
                         </div>
@@ -248,18 +260,19 @@
                     </div>
                     <div class="event-content left">
                         <div class="event-image">
-                            <img src="images/Gemini_Generated_Image_bkcq4bbkcq4bbkcq.png" alt="Seni Seviyorum" loading="lazy">
+                            <img src="images/Gemini_Generated_Image_bkcq4bbkcq4bbkcq.png" alt="Seni Seviyorum"
+                                loading="lazy">
                             <div class="image-shine"></div>
                         </div>
                         <div class="event-details">
                             <span class="event-date">23 Temmuz 2021</span>
                             <h3 class="event-title">İlk "Seni Seviyorum" 💗</h3>
                             <p class="event-description">
-                                Antalya'da kumsalda, yalınayak dalgalarda koşarken... Birden durdum, 
+                                Antalya'da kumsalda, yalınayak dalgalarda koşarken... Birden durdum,
                                 gözlerine baktım ve söyledim. "Seni seviyorum, Ela."
                             </p>
                             <blockquote class="event-quote">
-                                "O kelimeler ağzımdan çıktığında, sonunda evime gelmiş gibi hissettim." 
+                                "O kelimeler ağzımdan çıktığında, sonunda evime gelmiş gibi hissettim."
                                 <span class="quote-author">- Kaan</span>
                             </blockquote>
                         </div>
@@ -274,18 +287,19 @@
                     </div>
                     <div class="event-content right">
                         <div class="event-image">
-                            <img src="images/Gemini_Generated_Image_ipze7tipze7tipze.png" alt="1. Yıldönümü" loading="lazy">
+                            <img src="images/Gemini_Generated_Image_ipze7tipze7tipze.png" alt="1. Yıldönümü"
+                                loading="lazy">
                             <div class="image-shine"></div>
                         </div>
                         <div class="event-details">
                             <span class="event-date">14 Şubat 2022</span>
                             <h3 class="event-title">1. Yıldönümümüz 🥂</h3>
                             <p class="event-description">
-                                Bir yıl önce tanışmıştık. Şimdi hayatımı sensiz hayal edemiyordum. 
+                                Bir yıl önce tanışmıştık. Şimdi hayatımı sensiz hayal edemiyordum.
                                 O akşam mumların ışığında, sana bir söz verdim.
                             </p>
                             <blockquote class="event-quote">
-                                "365 gün seninle, ama sanki hep daha fazlasını istiyorum." 
+                                "365 gün seninle, ama sanki hep daha fazlasını istiyorum."
                                 <span class="quote-author">- Ela</span>
                             </blockquote>
                         </div>
@@ -300,18 +314,19 @@
                     </div>
                     <div class="event-content left">
                         <div class="event-image">
-                            <img src="images/Gemini_Generated_Image_bcj9lcbcj9lcbcj9.png" alt="İlk Evimiz" loading="lazy">
+                            <img src="images/Gemini_Generated_Image_bcj9lcbcj9lcbcj9.png" alt="İlk Evimiz"
+                                loading="lazy">
                             <div class="image-shine"></div>
                         </div>
                         <div class="event-details">
                             <span class="event-date">1 Mayıs 2022</span>
                             <h3 class="event-title">İlk Evimiz 🏡</h3>
                             <p class="event-description">
-                                Boğaz manzaralı, balkonlu küçük evimiz. İlk sabah kahvemizi 
+                                Boğaz manzaralı, balkonlu küçük evimiz. İlk sabah kahvemizi
                                 balkonda izlediğimiz gün doğumu eşliğinde içtik.
                             </p>
                             <blockquote class="event-quote">
-                                "Seninle olmak, herhangi bir yeri eve dönüştürür." 
+                                "Seninle olmak, herhangi bir yeri eve dönüştürür."
                                 <span class="quote-author">- Kaan</span>
                             </blockquote>
                         </div>
@@ -329,7 +344,8 @@
                     </div>
                     <div class="event-content center featured">
                         <div class="event-image featured-image">
-                            <img src="images/Gemini_Generated_Image_yosrs0yosrs0yosr.png" alt="Evlilik Teklifi" loading="lazy">
+                            <img src="images/Gemini_Generated_Image_yosrs0yosrs0yosr.png" alt="Evlilik Teklifi"
+                                loading="lazy">
                             <div class="image-shine"></div>
                             <div class="sparkle-overlay">
                                 <span class="sparkle"></span>
@@ -343,17 +359,17 @@
                             <span class="event-date special-date">✨ 15 Ağustos 2023 ✨</span>
                             <h3 class="event-title featured-title">Evlilik Teklifi 💍</h3>
                             <p class="event-description featured-description">
-                                Kapadokya'ya geri döndük. Aynı yer, aynı balon, ama bu sefer farklıydı. 
-                                Gün doğumu en güzel anındayken, dizlerimin üstüne çöktüm. Ellerim 
+                                Kapadokya'ya geri döndük. Aynı yer, aynı balon, ama bu sefer farklıydı.
+                                Gün doğumu en güzel anındayken, dizlerimin üstüne çöktüm. Ellerim
                                 titriyordu ama kalbim her zamankinden emindı.
                                 <br><br>
-                                <em>"Ela, seninle tanıştığımdan beri her gün bir mucize yaşıyorum. 
-                                Sen benim en iyi arkadaşım, aşkım, hayat ortağımsın. 
-                                Benimle evlenir misin?"</em>
+                                <em>"Ela, seninle tanıştığımdan beri her gün bir mucize yaşıyorum.
+                                    Sen benim en iyi arkadaşım, aşkım, hayat ortağımsın.
+                                    Benimle evlenir misin?"</em>
                             </p>
                             <div class="proposal-quotes">
                                 <blockquote>
-                                    "Sana 'evet' demek, hayatıma 'evet' demekti." 
+                                    "Sana 'evet' demek, hayatıma 'evet' demekti."
                                     <span class="quote-author">- Ela</span>
                                 </blockquote>
                             </div>
@@ -376,11 +392,11 @@
                             <span class="event-date">10 Ekim 2023</span>
                             <h3 class="event-title">Nişan Törenimiz 💑</h3>
                             <p class="event-description">
-                                Sevdiklerimizle birlikte, resmi olarak nişanlandık. Parmağımdaki 
+                                Sevdiklerimizle birlikte, resmi olarak nişanlandık. Parmağımdaki
                                 yüzük artık sadece bir takı değil, sonsuz bir sözdü.
                             </p>
                             <blockquote class="event-quote">
-                                "O gece herkese 'Nişanlım' diye tanıştırmak çok gurur vericiydi." 
+                                "O gece herkese 'Nişanlım' diye tanıştırmak çok gurur vericiydi."
                                 <span class="quote-author">- Ela</span>
                             </blockquote>
                         </div>
@@ -412,23 +428,26 @@
                             <span class="event-date special-date">✨ 20 Mayıs 2024 ✨</span>
                             <h3 class="event-title featured-title">Düğünümüz 👰🤵</h3>
                             <p class="event-description featured-description">
-                                Hayatımın en güzel günü. Beyaz elbiseli sen, smokinli ben... 
+                                Hayatımın en güzel günü. Beyaz elbiseli sen, smokinli ben...
                                 Yüzlerce gülün arasında, gözlerine bakarak ant içtik.
                                 <br><br>
-                                <em>"Seni sağlıkta ve hastalıkta, mutlulukta ve üzüntüde, 
-                                ölüm bizi ayırana kadar sevmeye ant içiyorum."</em>
+                                <em>"Seni sağlıkta ve hastalıkta, mutlulukta ve üzüntüde,
+                                    ölüm bizi ayırana kadar sevmeye ant içiyorum."</em>
                             </p>
                             <div class="wedding-moments-grid">
                                 <div class="wedding-moment">
-                                    <img src="images/Gemini_Generated_Image_eze0emeze0emeze0.png" alt="İlk Öpücük" loading="lazy">
+                                    <img src="images/Gemini_Generated_Image_eze0emeze0emeze0.png" alt="İlk Öpücük"
+                                        loading="lazy">
                                     <span>İlk Öpücük 💋</span>
                                 </div>
                                 <div class="wedding-moment">
-                                    <img src="images/Gemini_Generated_Image_8yehxt8yehxt8yeh.png" alt="İlk Dans" loading="lazy">
+                                    <img src="images/Gemini_Generated_Image_8yehxt8yehxt8yeh.png" alt="İlk Dans"
+                                        loading="lazy">
                                     <span>İlk Dans 💃</span>
                                 </div>
                                 <div class="wedding-moment">
-                                    <img src="images/Gemini_Generated_Image_ib21d2ib21d2ib21.png" alt="Pasta Kesimi" loading="lazy">
+                                    <img src="images/Gemini_Generated_Image_ib21d2ib21d2ib21.png" alt="Pasta Kesimi"
+                                        loading="lazy">
                                     <span>Pasta 🎂</span>
                                 </div>
                             </div>
@@ -451,11 +470,11 @@
                             <span class="event-date">25 Mayıs 2024</span>
                             <h3 class="event-title">Balayımız 🌴</h3>
                             <p class="event-description">
-                                Pamukkale'nin beyaz travertenlerinde, turkuaz sularda... 
+                                Pamukkale'nin beyaz travertenlerinde, turkuaz sularda...
                                 Artık evliydik. Her gün uyanıp "eşim" demek çok özel geliyordu.
                             </p>
                             <blockquote class="event-quote">
-                                "Balayı bitsin istemiyordum çünkü her an sihirliydi." 
+                                "Balayı bitsin istemiyordum çünkü her an sihirliydi."
                                 <span class="quote-author">- Ela</span>
                             </blockquote>
                         </div>
@@ -477,11 +496,11 @@
                             <span class="event-date infinity-date">Şimdi ve Sonsuza Kadar ♾️</span>
                             <h3 class="event-title">Hikayemiz Devam Ediyor...</h3>
                             <p class="event-description">
-                                Her gün yeni bir sayfa yazıyoruz. Bazı günler sıradan kahve 
+                                Her gün yeni bir sayfa yazıyoruz. Bazı günler sıradan kahve
                                 sabahları, bazı günler yeni maceralar... Ama her gün, birlikte.
                             </p>
                             <blockquote class="event-quote">
-                                "Sonsuza kadar yeterli değil, ama başlangıç için iyi." 
+                                "Sonsuza kadar yeterli değil, ama başlangıç için iyi."
                                 <span class="quote-author">- Kaan & Ela</span>
                             </blockquote>
                         </div>
@@ -498,7 +517,7 @@
             <h2 class="section-title">Fotoğraf Galerisi</h2>
             <p class="section-subtitle">Her fotoğraf bir hikaye, her hikaye bir hatıra...</p>
         </div>
-        
+
         <div class="gallery-filters">
             <button class="filter-btn active" data-filter="all">Hepsi</button>
             <button class="filter-btn" data-filter="romance">Romantik 💕</button>
@@ -507,7 +526,7 @@
             <button class="filter-btn" data-filter="wedding">Düğün 💒</button>
             <button class="filter-btn" data-filter="seasons">Mevsimler 🍂</button>
         </div>
-        
+
         <div class="gallery-grid" id="galleryGrid">
             <!-- Romance -->
             <div class="gallery-item" data-category="romance">
@@ -517,7 +536,7 @@
                     <p>Bazen kelimeler gereksizdir...</p>
                 </div>
             </div>
-            
+
             <div class="gallery-item" data-category="romance">
                 <img src="images/Gemini_Generated_Image_hq5cthq5cthq5cth.png" alt="Slow Dance" loading="lazy">
                 <div class="gallery-overlay">
@@ -525,7 +544,7 @@
                     <p>Sadece bizim şarkımız...</p>
                 </div>
             </div>
-            
+
             <div class="gallery-item" data-category="romance">
                 <img src="images/Gemini_Generated_Image_tumr2ttumr2ttumr.png" alt="Sabah" loading="lazy">
                 <div class="gallery-overlay">
@@ -533,7 +552,7 @@
                     <p>En güzel uyanış...</p>
                 </div>
             </div>
-            
+
             <div class="gallery-item" data-category="romance">
                 <img src="images/Gemini_Generated_Image_3x3d3j3x3d3j3x3d.png" alt="Yağmurlu Gün" loading="lazy">
                 <div class="gallery-overlay">
@@ -541,7 +560,7 @@
                     <p>Seninle yağmur bile güzel...</p>
                 </div>
             </div>
-            
+
             <!-- Travel -->
             <div class="gallery-item" data-category="travel">
                 <img src="images/Gemini_Generated_Image_28eby828eby828eb.png" alt="Kapadokya" loading="lazy">
@@ -550,7 +569,7 @@
                     <p>Balonların arasında...</p>
                 </div>
             </div>
-            
+
             <div class="gallery-item" data-category="travel">
                 <img src="images/Gemini_Generated_Image_ts048pts048pts04.png" alt="Pamukkale" loading="lazy">
                 <div class="gallery-overlay">
@@ -558,7 +577,7 @@
                     <p>Beyaz cennet...</p>
                 </div>
             </div>
-            
+
             <div class="gallery-item" data-category="travel">
                 <img src="images/Gemini_Generated_Image_bkcq4bbkcq4bbkcq.png" alt="Antalya" loading="lazy">
                 <div class="gallery-overlay">
@@ -566,7 +585,7 @@
                     <p>Sahilde gün batımı...</p>
                 </div>
             </div>
-            
+
             <!-- Daily Life -->
             <div class="gallery-item" data-category="daily">
                 <img src="images/Gemini_Generated_Image_bcj9lcbcj9lcbcj9.png" alt="Kahve" loading="lazy">
@@ -575,7 +594,7 @@
                     <p>Balkonda başlayan günler...</p>
                 </div>
             </div>
-            
+
             <div class="gallery-item" data-category="daily">
                 <img src="images/Gemini_Generated_Image_r2r1xjr2r1xjr2r1.png" alt="Mutfak" loading="lazy">
                 <div class="gallery-overlay">
@@ -583,7 +602,7 @@
                     <p>Mutfakta kahkahalar...</p>
                 </div>
             </div>
-            
+
             <div class="gallery-item" data-category="daily">
                 <img src="images/Gemini_Generated_Image_y8cecmy8cecmy8ce.png" alt="Film Gecesi" loading="lazy">
                 <div class="gallery-overlay">
@@ -591,7 +610,7 @@
                     <p>Patlamış mısır ve romantik filmler...</p>
                 </div>
             </div>
-            
+
             <div class="gallery-item" data-category="daily">
                 <img src="images/Gemini_Generated_Image_p3x0wdp3x0wdp3x0.png" alt="Okuma" loading="lazy">
                 <div class="gallery-overlay">
@@ -599,7 +618,7 @@
                     <p>Sessiz anlar, birlikte...</p>
                 </div>
             </div>
-            
+
             <!-- Wedding -->
             <div class="gallery-item" data-category="wedding">
                 <img src="images/Gemini_Generated_Image_5t36zf5t36zf5t36.png" alt="Hazırlık" loading="lazy">
@@ -608,7 +627,7 @@
                     <p>Büyük gün için...</p>
                 </div>
             </div>
-            
+
             <div class="gallery-item" data-category="wedding">
                 <img src="images/Gemini_Generated_Image_od96hlod96hlod96.png" alt="Yemin" loading="lazy">
                 <div class="gallery-overlay">
@@ -616,7 +635,7 @@
                     <p>Sonsuza kadar...</p>
                 </div>
             </div>
-            
+
             <div class="gallery-item" data-category="wedding">
                 <img src="images/Gemini_Generated_Image_8yehxt8yehxt8yeh.png" alt="İlk Dans" loading="lazy">
                 <div class="gallery-overlay">
@@ -624,7 +643,7 @@
                     <p>Sadece sen ve ben...</p>
                 </div>
             </div>
-            
+
             <div class="gallery-item" data-category="wedding">
                 <img src="images/Gemini_Generated_Image_lfj2wplfj2wplfj2.png" alt="Yüzükler" loading="lazy">
                 <div class="gallery-overlay">
@@ -632,7 +651,7 @@
                     <p>Sonsuzluk vaat...</p>
                 </div>
             </div>
-            
+
             <!-- Seasons -->
             <div class="gallery-item" data-category="seasons">
                 <img src="images/Gemini_Generated_Image_329ayf329ayf329a.png" alt="Sonbahar" loading="lazy">
@@ -641,7 +660,7 @@
                     <p>Sarı yaprakların arasında...</p>
                 </div>
             </div>
-            
+
             <div class="gallery-item" data-category="seasons">
                 <img src="images/Gemini_Generated_Image_avpbkaavpbkaavpb.png" alt="Kış" loading="lazy">
                 <div class="gallery-overlay">
@@ -649,7 +668,7 @@
                     <p>Kar altında öpücük...</p>
                 </div>
             </div>
-            
+
             <div class="gallery-item" data-category="seasons">
                 <img src="images/Gemini_Generated_Image_yxzqvxyxzqvxyxzq.png" alt="İlkbahar" loading="lazy">
                 <div class="gallery-overlay">
@@ -657,7 +676,7 @@
                     <p>Laleler arasında...</p>
                 </div>
             </div>
-            
+
             <div class="gallery-item" data-category="seasons">
                 <img src="images/Gemini_Generated_Image_omg966omg966omg9.png" alt="Yaz" loading="lazy">
                 <div class="gallery-overlay">
@@ -675,7 +694,7 @@
             <h2 class="section-title">Kalbimizde Özel Yeri Olan Anlar</h2>
             <p class="section-subtitle">Hayatımızı değiştiren bu anlar...</p>
         </div>
-        
+
         <div class="special-moments-grid">
             <!-- Proposal -->
             <div class="special-card" data-aos="fade-up">
@@ -690,7 +709,7 @@
                     <blockquote>"Hayatımın en heyecan verici ve en mutlu anıydı."</blockquote>
                 </div>
             </div>
-            
+
             <!-- Wedding -->
             <div class="special-card" data-aos="fade-up" data-aos-delay="100">
                 <div class="special-image">
@@ -704,7 +723,7 @@
                     <blockquote>"O gün sadece evlenmedik, bir olduk."</blockquote>
                 </div>
             </div>
-            
+
             <!-- First Home -->
             <div class="special-card" data-aos="fade-up" data-aos-delay="200">
                 <div class="special-image">
@@ -728,7 +747,7 @@
             <h2 class="section-title">Birbirimize Mesajlarımız</h2>
             <p class="section-subtitle">Kelimelerle yazılmış duygular...</p>
         </div>
-        
+
         <div class="notes-grid">
             <!-- From Kaan -->
             <div class="note-card from-kaan" data-aos="fade-right">
@@ -740,12 +759,12 @@
                     <p class="note-text">
                         Canım Elam,
                         <br><br>
-                        Bugün 3. yıl dönümümüz. Seni tanımadan önce hayatım siyah-beyazdı, 
-                        sen geldin ve her şey renkli oldu. Seninle olmak, her günü Cumartesi 
+                        Bugün 3. yıl dönümümüz. Seni tanımadan önce hayatım siyah-beyazdı,
+                        sen geldin ve her şey renkli oldu. Seninle olmak, her günü Cumartesi
                         yapmak gibi.
                         <br><br>
-                        Sabah kahveni hazırlamak, akşam eve geldiğimde gülüşünü görmek, 
-                        gece yanımda uyuyan nefesini duymak... Bunlar benim için en değerli 
+                        Sabah kahveni hazırlamak, akşam eve geldiğimde gülüşünü görmek,
+                        gece yanımda uyuyan nefesini duymak... Bunlar benim için en değerli
                         anlar.
                         <br><br>
                         Seni sonsuza kadar seveceğim.
@@ -756,11 +775,12 @@
                 </div>
                 <div class="note-decoration">
                     <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"/>
+                        <path
+                            d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z" />
                     </svg>
                 </div>
             </div>
-            
+
             <!-- From Ela -->
             <div class="note-card from-ela" data-aos="fade-left">
                 <div class="note-header">
@@ -771,10 +791,10 @@
                     <p class="note-text">
                         Sevgili Kaan'ım,
                         <br><br>
-                        Bugün düğünümüz. Sana 'evet' derken içimden geçenleri anlatamam. 
+                        Bugün düğünümüz. Sana 'evet' derken içimden geçenleri anlatamam.
                         Sen benim için sadece bir eş değilsin, ruh ikizimsin.
                         <br><br>
-                        Seninle gülmek, seninle ağlamak, seninle susabilmek... Bunlar 
+                        Seninle gülmek, seninle ağlamak, seninle susabilmek... Bunlar
                         benim için aşkın tanımı.
                         <br><br>
                         Hayatının geri kalanını benimle geçireceğin için teşekkür ederim.
@@ -785,7 +805,8 @@
                 </div>
                 <div class="note-decoration">
                     <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"/>
+                        <path
+                            d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z" />
                     </svg>
                 </div>
             </div>
@@ -799,7 +820,7 @@
             <h2 class="section-title">Asla Unutmayacağımız Günler</h2>
             <p class="section-subtitle">Her tarih, bir hikayenin başlangıcı...</p>
         </div>
-        
+
         <div class="dates-grid">
             <div class="date-card" data-aos="zoom-in">
                 <div class="date-icon">📚</div>
@@ -807,21 +828,21 @@
                 <div class="date-value">14 Şubat 2021</div>
                 <div class="date-ago" id="firstMeetingAgo"></div>
             </div>
-            
+
             <div class="date-card" data-aos="zoom-in" data-aos-delay="100">
                 <div class="date-icon">💕</div>
                 <h3>İlk "Seni Seviyorum"</h3>
                 <div class="date-value">23 Temmuz 2021</div>
                 <div class="date-ago" id="firstILoveYouAgo"></div>
             </div>
-            
+
             <div class="date-card" data-aos="zoom-in" data-aos-delay="200">
                 <div class="date-icon">💍</div>
                 <h3>Evlilik Teklifi</h3>
                 <div class="date-value">15 Ağustos 2023</div>
                 <div class="date-ago" id="proposalAgo"></div>
             </div>
-            
+
             <div class="date-card special-date-card" data-aos="zoom-in" data-aos-delay="300">
                 <div class="date-icon">💒</div>
                 <h3>Düğün Günümüz</h3>
@@ -829,7 +850,7 @@
                 <div class="date-ago" id="weddingAgo"></div>
             </div>
         </div>
-        
+
         <!-- Countdown to Anniversary -->
         <div class="countdown-section" data-aos="fade-up">
             <h3 class="countdown-title">
@@ -867,7 +888,7 @@
             <div class="footer-overlay"></div>
         </div>
         <canvas id="footerParticles" class="footer-particles"></canvas>
-        
+
         <div class="footer-content">
             <h2 class="footer-quote">
                 "Ve sonsuza kadar<br>mutlu yaşadılar..."
@@ -876,10 +897,11 @@
             <div class="footer-infinity">♾️</div>
             <div class="footer-signature">
                 <p>Bizim Hikayemiz | Est. 14 Şubat 2021</p>
-                <p class="footer-small">Bu web sitesi, Ela ve Kaan'ın aşk hikayesini anlatmak için özel olarak tasarlanmıştır. 💕</p>
+                <p class="footer-small">Bu web sitesi, Ela ve Kaan'ın aşk hikayesini anlatmak için özel olarak
+                    tasarlanmıştır. 💕</p>
             </div>
         </div>
-        
+
         <div class="footer-hearts">
             <span>❤️</span><span>💕</span><span>💖</span><span>❤️</span><span>💕</span>
         </div>
@@ -902,4 +924,5 @@
     <!-- Scripts -->
     <script src="script.js"></script>
 </body>
+
 </html>

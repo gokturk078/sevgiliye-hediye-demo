@@ -50,25 +50,25 @@ let lastScroll = 0;
 
 window.addEventListener('scroll', () => {
     const currentScroll = window.pageYOffset;
-    
+
     // Navbar background
     if (currentScroll > 100) {
         navbar.classList.add('scrolled');
     } else {
         navbar.classList.remove('scrolled');
     }
-    
+
     // Scroll progress
     const docHeight = document.documentElement.scrollHeight - window.innerHeight;
     const scrollPercent = (currentScroll / docHeight) * 100;
     scrollProgress.style.width = scrollPercent + '%';
-    
+
     // Timeline progress
     updateTimelineProgress();
-    
+
     // Active nav link
     updateActiveNavLink();
-    
+
     lastScroll = currentScroll;
 });
 
@@ -76,6 +76,7 @@ window.addEventListener('scroll', () => {
 navToggle.addEventListener('click', () => {
     navMenu.classList.toggle('active');
     navToggle.classList.toggle('active');
+    document.body.classList.toggle('menu-open');
 });
 
 // Close menu on link click
@@ -83,19 +84,31 @@ document.querySelectorAll('.nav-link').forEach(link => {
     link.addEventListener('click', () => {
         navMenu.classList.remove('active');
         navToggle.classList.remove('active');
+        document.body.classList.remove('menu-open');
     });
+});
+
+// Close menu on overlay click (for mobile)
+document.addEventListener('click', (e) => {
+    if (document.body.classList.contains('menu-open') &&
+        !navMenu.contains(e.target) &&
+        !navToggle.contains(e.target)) {
+        navMenu.classList.remove('active');
+        navToggle.classList.remove('active');
+        document.body.classList.remove('menu-open');
+    }
 });
 
 // Smooth scroll for anchor links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
+    anchor.addEventListener('click', function (e) {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
         if (target) {
             const headerOffset = 80;
             const elementPosition = target.getBoundingClientRect().top;
             const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-            
+
             window.scrollTo({
                 top: offsetPosition,
                 behavior: 'smooth'
@@ -108,13 +121,13 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 function updateActiveNavLink() {
     const sections = document.querySelectorAll('section[id]');
     const scrollY = window.pageYOffset;
-    
+
     sections.forEach(section => {
         const sectionHeight = section.offsetHeight;
         const sectionTop = section.offsetTop - 150;
         const sectionId = section.getAttribute('id');
         const navLink = document.querySelector(`.nav-link[href="#${sectionId}"]`);
-        
+
         if (navLink && scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
             document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
             navLink.classList.add('active');
@@ -126,14 +139,14 @@ function updateActiveNavLink() {
 function updateTimelineProgress() {
     const timelineSection = document.querySelector('.timeline-section');
     if (!timelineSection) return;
-    
+
     const rect = timelineSection.getBoundingClientRect();
     const sectionTop = rect.top;
     const sectionHeight = timelineSection.offsetHeight;
     const windowHeight = window.innerHeight;
-    
+
     if (sectionTop < windowHeight && sectionTop + sectionHeight > 0) {
-        const progress = Math.min(100, Math.max(0, 
+        const progress = Math.min(100, Math.max(0,
             ((windowHeight - sectionTop) / (sectionHeight + windowHeight)) * 100
         ));
         timelineProgress.style.height = progress + '%';
@@ -154,26 +167,26 @@ class ParticleSystem {
             speed: options.speed || 1,
             ...options
         };
-        
+
         this.resize();
         this.init();
         this.animate();
-        
+
         window.addEventListener('resize', () => this.resize());
     }
-    
+
     resize() {
         this.canvas.width = this.canvas.offsetWidth;
         this.canvas.height = this.canvas.offsetHeight;
     }
-    
+
     init() {
         this.particles = [];
         for (let i = 0; i < this.options.particleCount; i++) {
             this.particles.push(this.createParticle());
         }
     }
-    
+
     createParticle() {
         return {
             x: Math.random() * this.canvas.width,
@@ -186,22 +199,22 @@ class ParticleSystem {
             pulse: Math.random() * Math.PI * 2
         };
     }
-    
+
     animate() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        
+
         this.particles.forEach(particle => {
             // Update position
             particle.x += particle.speedX;
             particle.y += particle.speedY;
             particle.pulse += 0.02;
-            
+
             // Wrap around edges
             if (particle.x < 0) particle.x = this.canvas.width;
             if (particle.x > this.canvas.width) particle.x = 0;
             if (particle.y < 0) particle.y = this.canvas.height;
             if (particle.y > this.canvas.height) particle.y = 0;
-            
+
             // Draw particle
             const currentOpacity = particle.opacity * (0.5 + 0.5 * Math.sin(particle.pulse));
             this.ctx.beginPath();
@@ -210,7 +223,7 @@ class ParticleSystem {
             this.ctx.globalAlpha = currentOpacity;
             this.ctx.fill();
         });
-        
+
         this.ctx.globalAlpha = 1;
         requestAnimationFrame(() => this.animate());
     }
@@ -227,7 +240,7 @@ function initParticles() {
             speed: 0.5
         });
     }
-    
+
     if (footerParticlesCanvas) {
         new ParticleSystem(footerParticlesCanvas, {
             particleCount: 40,
@@ -249,9 +262,9 @@ filterBtns.forEach(btn => {
         // Update active button
         filterBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-        
+
         const filter = btn.dataset.filter;
-        
+
         galleryItems.forEach(item => {
             if (filter === 'all' || item.dataset.category === filter) {
                 item.classList.remove('hidden');
@@ -279,7 +292,7 @@ function openLightbox(item) {
     const img = item.querySelector('img');
     const title = item.querySelector('.gallery-overlay h4')?.textContent || '';
     const desc = item.querySelector('.gallery-overlay p')?.textContent || '';
-    
+
     lightboxImage.src = img.src;
     lightboxTitle.textContent = title;
     lightboxDesc.textContent = desc;
@@ -294,10 +307,10 @@ function closeLightbox() {
 
 function navigateLightbox(direction) {
     currentImageIndex += direction;
-    
+
     if (currentImageIndex < 0) currentImageIndex = visibleImages.length - 1;
     if (currentImageIndex >= visibleImages.length) currentImageIndex = 0;
-    
+
     openLightbox(visibleImages[currentImageIndex]);
 }
 
@@ -313,7 +326,7 @@ lightbox?.addEventListener('click', (e) => {
 // Keyboard navigation
 document.addEventListener('keydown', (e) => {
     if (!lightbox.classList.contains('active')) return;
-    
+
     if (e.key === 'Escape') closeLightbox();
     if (e.key === 'ArrowLeft') navigateLightbox(-1);
     if (e.key === 'ArrowRight') navigateLightbox(1);
@@ -324,7 +337,7 @@ function updateCountdown() {
     const targetDate = new Date('2025-02-14T00:00:00');
     const now = new Date();
     const diff = targetDate - now;
-    
+
     if (diff <= 0) {
         document.getElementById('countdownDays').textContent = '🎉';
         document.getElementById('countdownHours').textContent = '🎉';
@@ -332,12 +345,12 @@ function updateCountdown() {
         document.getElementById('countdownSeconds').textContent = '🎉';
         return;
     }
-    
+
     const days = Math.floor(diff / (1000 * 60 * 60 * 24));
     const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-    
+
     document.getElementById('countdownDays').textContent = days.toString().padStart(2, '0');
     document.getElementById('countdownHours').textContent = hours.toString().padStart(2, '0');
     document.getElementById('countdownMinutes').textContent = minutes.toString().padStart(2, '0');
@@ -354,20 +367,20 @@ function calculateDaysAgo(dateString) {
     const now = new Date();
     const diff = now - date;
     const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    
+
     if (days < 0) {
         return `${Math.abs(days)} gün sonra`;
     }
-    
+
     const years = Math.floor(days / 365);
     const months = Math.floor((days % 365) / 30);
     const remainingDays = days % 30;
-    
+
     let result = '';
     if (years > 0) result += `${years} yıl `;
     if (months > 0) result += `${months} ay `;
     if (remainingDays > 0 || result === '') result += `${remainingDays} gün`;
-    
+
     return result.trim() + ' önce';
 }
 
@@ -376,7 +389,7 @@ function updateDateAgo() {
     const firstILoveYou = document.getElementById('firstILoveYouAgo');
     const proposal = document.getElementById('proposalAgo');
     const wedding = document.getElementById('weddingAgo');
-    
+
     if (firstMeeting) firstMeeting.textContent = calculateDaysAgo('2021-02-14');
     if (firstILoveYou) firstILoveYou.textContent = calculateDaysAgo('2021-07-23');
     if (proposal) proposal.textContent = calculateDaysAgo('2023-08-15');
@@ -388,7 +401,7 @@ updateDateAgo();
 // ============ SCROLL ANIMATIONS (AOS-like) ============
 function initAnimations() {
     const animatedElements = document.querySelectorAll('[data-aos]');
-    
+
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -399,7 +412,7 @@ function initAnimations() {
         threshold: 0.1,
         rootMargin: '0px 0px -50px 0px'
     });
-    
+
     animatedElements.forEach(el => {
         observer.observe(el);
     });
@@ -410,12 +423,12 @@ document.addEventListener('mousemove', (e) => {
     const cards = document.querySelectorAll('.photo-card');
     const mouseX = e.clientX / window.innerWidth - 0.5;
     const mouseY = e.clientY / window.innerHeight - 0.5;
-    
+
     cards.forEach((card, index) => {
         const intensity = (index + 1) * 10;
         const rotateX = mouseY * intensity;
         const rotateY = mouseX * intensity;
-        
+
         card.style.transform = `
             rotate(${index === 0 ? -5 : 8}deg)
             rotateX(${rotateX}deg)
@@ -437,7 +450,7 @@ if ('IntersectionObserver' in window) {
             }
         });
     });
-    
+
     lazyImages.forEach(img => imageObserver.observe(img));
 }
 
@@ -445,7 +458,7 @@ if ('IntersectionObserver' in window) {
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize particles after a delay
     setTimeout(initParticles, 3600);
-    
+
     // Add loaded class to images for fade-in effect
     document.querySelectorAll('img').forEach(img => {
         img.addEventListener('load', () => {
@@ -472,7 +485,7 @@ document.addEventListener('keydown', (e) => {
 
 function triggerHeartExplosion() {
     const hearts = ['❤️', '💕', '💖', '💗', '💓', '💞', '💝', '🥰', '😍'];
-    
+
     for (let i = 0; i < 50; i++) {
         setTimeout(() => {
             const heart = document.createElement('div');
@@ -487,11 +500,11 @@ function triggerHeartExplosion() {
                 animation: heartFall 3s ease-out forwards;
             `;
             document.body.appendChild(heart);
-            
+
             setTimeout(() => heart.remove(), 3000);
         }, i * 50);
     }
-    
+
     // Add animation keyframes
     if (!document.querySelector('#heart-fall-style')) {
         const style = document.createElement('style');
