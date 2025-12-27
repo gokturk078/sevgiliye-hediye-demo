@@ -632,6 +632,153 @@ function initParticles() {
 const filterBtns = document.querySelectorAll('.filter-btn');
 const galleryItems = document.querySelectorAll('.gallery-item');
 
+// ============ PROFESSIONAL IMAGE LAZY LOADING ============
+function initProfessionalLazyLoading() {
+    // Add loading styles dynamically
+    const style = document.createElement('style');
+    style.textContent = `
+        .gallery-item.loading {
+            position: relative;
+        }
+        .gallery-item.loading::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255,23,68,0.1) 0%, rgba(233,30,99,0.1) 100%);
+            z-index: 1;
+        }
+        .gallery-item.loading::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 40px;
+            height: 40px;
+            margin: -20px 0 0 -20px;
+            border: 3px solid rgba(255,23,68,0.3);
+            border-top-color: #FF1744;
+            border-radius: 50%;
+            animation: gallerySpinner 0.8s linear infinite;
+            z-index: 2;
+        }
+        @keyframes gallerySpinner {
+            to { transform: rotate(360deg); }
+        }
+        .gallery-item img {
+            transition: opacity 0.5s ease, transform 0.3s ease;
+        }
+        .gallery-item.loading img {
+            opacity: 0;
+        }
+        .gallery-item.loaded img {
+            opacity: 1;
+        }
+        .gallery-item.loaded {
+            animation: imageReveal 0.6s ease forwards;
+        }
+        @keyframes imageReveal {
+            from {
+                opacity: 0.8;
+                transform: scale(0.98);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+    `;
+    document.head.appendChild(style);
+
+    // Get all images that need lazy loading
+    const images = document.querySelectorAll('.gallery-item img, .special-image img, .event-image img, .wedding-moment img');
+
+    // Create IntersectionObserver for lazy loading
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                const container = img.closest('.gallery-item, .special-image, .event-image, .wedding-moment');
+
+                // Add loading state
+                if (container) {
+                    container.classList.add('loading');
+                }
+
+                // Get the actual source (might be in data-src or src)
+                const src = img.dataset.src || img.src;
+
+                if (src && src !== '') {
+                    // Create a new image to preload
+                    const preloadImg = new Image();
+
+                    preloadImg.onload = () => {
+                        // Set the source if it was deferred
+                        if (img.dataset.src) {
+                            img.src = img.dataset.src;
+                        }
+
+                        // Remove loading state, add loaded state
+                        if (container) {
+                            container.classList.remove('loading');
+                            container.classList.add('loaded');
+                        }
+                    };
+
+                    preloadImg.onerror = () => {
+                        console.error('Failed to load image:', src);
+                        if (container) {
+                            container.classList.remove('loading');
+                            container.classList.add('loaded'); // Still show, might be placeholder
+                        }
+                    };
+
+                    // Start loading
+                    preloadImg.src = src;
+                }
+
+                // Stop observing this image
+                observer.unobserve(img);
+            }
+        });
+    }, {
+        root: null,
+        rootMargin: '100px 0px', // Start loading 100px before visible
+        threshold: 0.01
+    });
+
+    // Observe all images
+    images.forEach(img => {
+        // If image hasn't loaded yet
+        if (!img.complete || img.naturalWidth === 0) {
+            imageObserver.observe(img);
+        } else {
+            // Image already loaded (cached)
+            const container = img.closest('.gallery-item, .special-image, .event-image, .wedding-moment');
+            if (container) {
+                container.classList.add('loaded');
+            }
+        }
+    });
+
+    // Also handle images in lightbox
+    const lightboxImg = document.getElementById('lightboxImage');
+    if (lightboxImg) {
+        lightboxImg.addEventListener('load', function () {
+            this.classList.add('loaded');
+        });
+    }
+}
+
+// Initialize lazy loading when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initProfessionalLazyLoading);
+} else {
+    initProfessionalLazyLoading();
+}
+
 filterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
         filterBtns.forEach(b => b.classList.remove('active'));
@@ -1411,7 +1558,9 @@ function initMusicPlayer() {
     if (!playBtn) return;
 
     let currentTrack = 0;
-    let audio = new Audio();
+    let isPlaying = false;
+    let shouldAutoPlay = false;
+    let audio = null;
 
     // Şarkı bilgileri - her şarkının anı etiketi de dahil
     const tracks = [
@@ -1458,11 +1607,77 @@ function initMusicPlayer() {
         return `${mins}:${secs.toString().padStart(2, '0')}`;
     }
 
-    function loadTrack(index) {
+    function createAudioElement() {
+        // Create new audio element each time to prevent caching issues
+        if (audio) {
+            audio.pause();
+            audio.removeEventListener('timeupdate', handleTimeUpdate);
+            audio.removeEventListener('ended', handleTrackEnd);
+            audio.removeEventListener('canplaythrough', handleCanPlay);
+            audio.removeEventListener('error', handleError);
+            audio.src = '';
+            audio.load();
+        }
+
+        audio = new Audio();
+        audio.preload = 'auto';
+
+        // Add event listeners
+        audio.addEventListener('timeupdate', handleTimeUpdate);
+        audio.addEventListener('ended', handleTrackEnd);
+        audio.addEventListener('canplaythrough', handleCanPlay);
+        audio.addEventListener('error', handleError);
+
+        return audio;
+    }
+
+    function handleTimeUpdate() {
+        if (audio && audio.duration) {
+            const progress = (audio.currentTime / audio.duration) * 100;
+            if (progressFill) progressFill.style.width = progress + '%';
+            if (timeCurrent) timeCurrent.textContent = formatTime(audio.currentTime);
+        }
+    }
+
+    function handleTrackEnd() {
+        // Auto-advance to next track
+        currentTrack = (currentTrack + 1) % tracks.length;
+        loadAndPlayTrack(currentTrack);
+    }
+
+    function handleCanPlay() {
+        if (shouldAutoPlay) {
+            shouldAutoPlay = false;
+            playTrack();
+        }
+    }
+
+    function handleError(e) {
+        console.error('Audio error:', e);
+        // Try to recover by reloading
+        setTimeout(() => {
+            if (audio) {
+                audio.load();
+            }
+        }, 1000);
+    }
+
+    function loadTrack(index, autoPlay = false) {
         currentTrack = index;
+        shouldAutoPlay = autoPlay;
+
+        // Create fresh audio element
+        createAudioElement();
+
+        // Set source and load
         audio.src = tracks[index].src;
         audio.load();
+
         updateTrackDisplay();
+    }
+
+    function loadAndPlayTrack(index) {
+        loadTrack(index, true);
     }
 
     function updateTrackDisplay() {
@@ -1476,22 +1691,38 @@ function initMusicPlayer() {
         playlistTracks.forEach((track, i) => {
             track.classList.toggle('active', i === currentTrack);
         });
+
+        // Reset progress
+        if (progressFill) progressFill.style.width = '0%';
+        if (timeCurrent) timeCurrent.textContent = '0:00';
     }
 
     function playTrack() {
-        audio.play().then(() => {
-            const playIcon = playBtn.querySelector('.play-icon');
-            const pauseIcon = playBtn.querySelector('.pause-icon');
-            playIcon?.classList.add('hidden');
-            pauseIcon?.classList.remove('hidden');
-            musicSection?.classList.add('playing');
-        }).catch(err => {
-            console.log('Audio play error:', err);
-        });
+        if (!audio) return;
+
+        const playPromise = audio.play();
+
+        if (playPromise !== undefined) {
+            playPromise.then(() => {
+                isPlaying = true;
+                const playIcon = playBtn.querySelector('.play-icon');
+                const pauseIcon = playBtn.querySelector('.pause-icon');
+                playIcon?.classList.add('hidden');
+                pauseIcon?.classList.remove('hidden');
+                musicSection?.classList.add('playing');
+            }).catch(err => {
+                console.log('Audio play error:', err);
+                // User interaction required - wait for next click
+                isPlaying = false;
+            });
+        }
     }
 
     function pauseTrack() {
+        if (!audio) return;
+
         audio.pause();
+        isPlaying = false;
         const playIcon = playBtn.querySelector('.play-icon');
         const pauseIcon = playBtn.querySelector('.pause-icon');
         playIcon?.classList.remove('hidden');
@@ -1499,26 +1730,15 @@ function initMusicPlayer() {
         musicSection?.classList.remove('playing');
     }
 
-    // Update progress bar
-    audio.addEventListener('timeupdate', () => {
-        if (audio.duration) {
-            const progress = (audio.currentTime / audio.duration) * 100;
-            if (progressFill) progressFill.style.width = progress + '%';
-            if (timeCurrent) timeCurrent.textContent = formatTime(audio.currentTime);
-        }
-    });
-
-    // When track ends, play next
-    audio.addEventListener('ended', () => {
-        currentTrack = (currentTrack + 1) % tracks.length;
-        loadTrack(currentTrack);
-        playTrack();
-    });
-
     // Play/Pause button
     playBtn.addEventListener('click', () => {
-        if (audio.paused) {
-            playTrack();
+        if (!audio || audio.paused) {
+            // If audio doesn't exist or no source, load current track first
+            if (!audio || !audio.src || audio.src === '') {
+                loadAndPlayTrack(currentTrack);
+            } else {
+                playTrack();
+            }
         } else {
             pauseTrack();
         }
@@ -1526,36 +1746,44 @@ function initMusicPlayer() {
 
     // Previous track
     prevBtn?.addEventListener('click', () => {
+        const wasPlaying = isPlaying;
         currentTrack = (currentTrack - 1 + tracks.length) % tracks.length;
-        loadTrack(currentTrack);
-        playTrack();
+        if (wasPlaying) {
+            loadAndPlayTrack(currentTrack);
+        } else {
+            loadTrack(currentTrack, false);
+        }
     });
 
     // Next track
     nextBtn?.addEventListener('click', () => {
+        const wasPlaying = isPlaying;
         currentTrack = (currentTrack + 1) % tracks.length;
-        loadTrack(currentTrack);
-        playTrack();
+        if (wasPlaying) {
+            loadAndPlayTrack(currentTrack);
+        } else {
+            loadTrack(currentTrack, false);
+        }
     });
 
     // Playlist items
     playlistTracks.forEach((track, i) => {
         track.addEventListener('click', () => {
-            loadTrack(i);
-            playTrack();
+            loadAndPlayTrack(i);
         });
     });
 
     // Progress bar click to seek
     const progressTrack = document.querySelector('.progress-bar-track');
     progressTrack?.addEventListener('click', (e) => {
+        if (!audio || !audio.duration) return;
         const rect = progressTrack.getBoundingClientRect();
         const percent = (e.clientX - rect.left) / rect.width;
         audio.currentTime = percent * audio.duration;
     });
 
-    // Load first track
-    loadTrack(0);
+    // Load first track (without auto-play)
+    loadTrack(0, false);
 }
 
 // ============ PHASE 3: CURSOR TRAIL ============
