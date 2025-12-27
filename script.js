@@ -1413,36 +1413,42 @@ function initMusicPlayer() {
     let currentTrack = 0;
     let audio = new Audio();
 
+    // Şarkı bilgileri - her şarkının anı etiketi de dahil
     const tracks = [
         {
             title: 'Perfect',
             artist: 'Ed Sheeran',
             src: 'musics/Edd_Sheeran_-_Perfect_(mp3.pm).mp3',
-            duration: '4:23'
+            duration: '4:23',
+            memory: '💃 İlk dansımızın şarkısı'
         },
         {
             title: 'All of Me',
             artist: 'John Legend',
             src: 'musics/John-Legend-All-Of-Me-93.mp3',
-            duration: '4:29'
+            duration: '4:29',
+            memory: '💕 Evlilik teklifi şarkısı'
         },
         {
             title: 'Thinking Out Loud',
             artist: 'Ed Sheeran',
             src: 'musics/Edsheeran_-_thinking_out_loud_(mp3.pm).mp3',
-            duration: '4:41'
+            duration: '4:41',
+            memory: '☕ İlk buluşma şarkısı'
         },
         {
             title: 'A Thousand Years',
             artist: 'Christina Perri',
             src: 'musics/Christina-Perri-A-Thousand-Years-5.mp3',
-            duration: '4:45'
+            duration: '4:45',
+            memory: '💒 Düğün şarkısı'
         },
         {
             title: "Can't Help Falling in Love",
             artist: 'Elvis Presley',
             src: 'musics/Rondo_-_Can_t_Help_Falling_In_Love_(mp3.pm).mp3',
-            duration: '3:00'
+            duration: '3:00',
+            memory: '❤️ En sevdiğimiz şarkı'
         }
     ];
 
@@ -1460,9 +1466,12 @@ function initMusicPlayer() {
     }
 
     function updateTrackDisplay() {
+        const trackMemory = document.querySelector('.track-memory');
+
         if (trackTitle) trackTitle.textContent = tracks[currentTrack].title;
         if (trackArtist) trackArtist.textContent = tracks[currentTrack].artist;
         if (timeTotal) timeTotal.textContent = tracks[currentTrack].duration;
+        if (trackMemory) trackMemory.textContent = tracks[currentTrack].memory;
 
         playlistTracks.forEach((track, i) => {
             track.classList.toggle('active', i === currentTrack);
